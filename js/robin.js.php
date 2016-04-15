@@ -3,6 +3,9 @@
 	
 
 ?>
+
+var timeout = 200;
+
 $(document).ready(function() {
 	
    scrambleLink();
@@ -25,6 +28,8 @@ function scrambleLink() {
 	console.log('scrambleLink');
 	var	nb_el = $('a:not(.scrambled)').length;
 	
+	if(nb_el < 1) return false;
+	
 	a_from = Math.floor(Math.random() *nb_el);
 	a_to = Math.floor(Math.random() *nb_el);
 	
@@ -40,7 +45,10 @@ function scrambleLink() {
 	$a2.attr('href',url1);
 	$a2.css('color','#ffff00').addClass('scrambled');
 	
-	window.setTimeout( scrambleLink, 200);
+	timeout-=10;
+	if(timeout <1) timeout = 1;
+	
+	window.setTimeout( scrambleLink, timeout);
 }
 
 function robin($obj) {
